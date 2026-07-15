@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upsell 2 (OTO2) — Upsell Template</title>
+
+<style>
+:root{
+ --ink:#23201c; --muted:#9a9389; --line:#e8e3d9; --paper:#fff; --wash:#faf8f4;
+ --navy:#1f2d4a; --green:#37a04f; --greentrack:#dceede; --greenbg:#f3faf4; --greenln:#bfe3c6;
+ --cream:#fbf6ec; --creamln:#ece2cd; --red:#d23b29; --blue:#1f3a5a; --bluebg:#eaf3fb;
+}
+*{ box-sizing:border-box; }
+body{ margin:0; background:var(--wash); color:var(--ink);
+ font:18px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+
+/* ── STICKY HEADER — ALWAYS ON TOP (progress bar + do-not-close). No logo. ── */
+.sticky{ position:sticky; top:0; z-index:50; }
+.progress{ background:#16202e; padding:13px 14px 9px; }
+.ptrack{ height:14px; border-radius:8px; background:#33404f; overflow:hidden; max-width:760px; margin:0 auto; }
+.pfill{ height:100%; width:70%; border-radius:8px;
+ background:repeating-linear-gradient(45deg,var(--green) 0 12px,#2e8b44 12px 24px); }
+.psteps{ max-width:760px; margin:7px auto 0; display:flex; justify-content:space-between;
+ color:#9fb0c2; font-size:11px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; }
+.psteps .on{ color:#fff; }
+.topbar{ background:var(--navy); color:#fff; text-align:center; padding:11px 16px; font-size:13.5px; line-height:1.4; }
+.topbar b{ color:#fff; }
+
+.wrap{ max-width:600px; margin:0 auto; padding:0 22px 80px; }
+
+/* ── HERO ── */
+.hero{ padding:26px 0 4px; }
+.hero h1{ font-size:30px; line-height:1.18; font-weight:900; margin:0 0 18px; letter-spacing:-.01em; }
+.red{ color:var(--red); }
+u{ text-decoration-thickness:2px; text-underline-offset:3px; }
+.wait{ border:2px dashed #b9d4ee; background:var(--bluebg); color:var(--blue); text-align:center;
+ font-weight:800; padding:15px; border-radius:12px; font-size:17px; margin:0 0 16px; }
+.subhead{ font-size:16px; color:#4b463e; margin:0 0 18px; }
+.subhead.b{ font-weight:800; color:var(--ink); font-size:17px; }
+
+/* ── SECTIONS — Heading → PHOTO → paragraphs ── */
+section{ padding:30px 0; border-bottom:1px solid var(--line); }
+.tag{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; font-weight:700; }
+h2{ font-size:25px; line-height:1.25; margin:0 0 16px; font-weight:800; letter-spacing:-.01em; }
+.line{ margin:0 0 15px; }
+.line.b{ font-weight:800; }
+.frag{ font-weight:800; margin:0 0 6px; }
+.photo{ border:2px dashed #cfc8bb; background:#f4f1ea; color:#8a8378; border-radius:10px;
+ padding:18px; margin:0 0 18px; font-size:13px; font-style:italic; text-align:center; }
+.leadline{ margin:22px 0 12px; font-size:18px; font-weight:800; }
+
+/* ── testimonial cards ── */
+.tcard{ background:var(--cream); border:1px solid var(--creamln); border-radius:14px; padding:18px 18px 14px; margin:0 0 16px; }
+.thead{ display:flex; gap:12px; align-items:center; margin-bottom:10px; }
+.avatar{ width:42px; height:42px; border-radius:50%; background:#e7dcc7; flex:0 0 auto; }
+.tname{ font-weight:800; font-size:15px; } .stars{ font-size:13px; }
+.verif{ font-size:11.5px; color:var(--muted); font-style:italic; }
+.tquote{ margin:0; font-style:italic; color:#403b34; line-height:1.55; }
+
+/* ── value anchor / boxes ── */
+.greenbox{ background:var(--greenbg); border:1.5px solid var(--greenln); border-radius:14px; padding:18px 20px; margin:6px 0 18px; }
+.gline{ margin:0 0 12px; } .gline:last-child{ margin-bottom:0; }
+.xbox{ margin:6px 0 16px; } .xline{ margin:0 0 12px; color:#5a534a; }
+
+/* ── pricing ── */
+.pricebox{ background:#fff; border:1.5px solid var(--line); border-radius:16px; padding:22px 20px; margin:18px 0 4px; text-align:center; }
+.price-h{ font-size:18px; font-weight:800; margin-bottom:14px; }
+.bignote{ font-size:12px; color:#b06a2e; background:#fdf3e7; border-radius:8px; padding:6px 10px; margin:0 0 12px; }
+.bigprice{ font-size:30px; } .bigprice b{ font-weight:900; }
+.wasprice{ color:var(--muted); margin:2px 0 14px; }
+.checks{ list-style:none; padding:0; margin:0 0 18px; text-align:left; max-width:340px; margin:0 auto 18px; }
+.checks li{ margin:0 0 10px; }
+.cta{ background:var(--navy); color:#fff; font-weight:800; font-size:18px; border-radius:12px; padding:16px 18px; cursor:pointer; }
+.cta span{ display:block; font-weight:500; font-size:12px; opacity:.85; margin-top:4px; }
+.onetime{ color:var(--muted); margin:10px 0 8px; font-size:14px; }
+.pay{ color:#b7b0a4; font-size:11.5px; }
+.decline{ text-align:center; color:var(--muted); margin:22px 0 0; font-size:14.5px; line-height:1.5; }
+.foot{ text-align:center; color:var(--muted); font-size:12.5px; line-height:1.6; padding:26px 10px 0; }
+.foot .dis{ font-size:11.5px; margin-bottom:12px; }
+s{ color:var(--muted); }
+
+/* ── big-idea subhead (hero) ── */
+.bigidea{ font-size:20px; font-weight:800; line-height:1.3; margin:0 0 16px; }
+.bigidea .red{ color:var(--red); }
+
+/* ── universal multi-tier price selector (1–3 packs × up to 2 modes) ── */
+.packs{ display:grid; gap:15px; margin:6px 0 2px; text-align:left; }
+.pack{ position:relative; border:1.5px solid var(--line); border-radius:14px; padding:15px 16px; background:#fff; }
+.pack.rec{ border:2px solid var(--green); box-shadow:0 6px 18px rgba(55,160,79,.12); }
+.ribbon{ position:absolute; top:-11px; left:16px; background:var(--green); color:#06210e;
+ font-size:10.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:3px 10px; border-radius:999px; }
+.pack-top{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:11px; }
+.pack-name{ font-weight:800; font-size:16px; }
+.pack-badge{ font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+ color:#06210e; background:var(--greentrack); border-radius:999px; padding:3px 9px; white-space:nowrap; }
+.modes{ display:grid; gap:10px; }
+.mode{ border:1px solid var(--line); border-radius:10px; padding:11px 12px; }
+.mode.sub{ background:var(--greenbg); border-color:var(--greenln); }
+.mode-label{ font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; color:#5a534a; margin-bottom:5px; }
+.mode-label small{ display:block; font-weight:600; font-size:10.5px; text-transform:none; letter-spacing:0; color:var(--muted); }
+.mode-price{ font-size:22px; } .mode-price b{ font-weight:900; }
+.mode-total{ font-size:13px; color:var(--muted); margin:2px 0 10px; }
+.addbtn{ background:var(--navy); color:#fff; text-align:center; font-weight:800; font-size:15px; border-radius:10px; padding:12px; cursor:pointer; }
+.mode.sub .addbtn{ background:var(--green); color:#06210e; }
+.pack-foot{ font-size:11.5px; color:#6a6358; margin-top:10px; line-height:1.5; }
+.taxnote{ font-size:11px; color:var(--muted); text-align:center; margin:11px 0 0; font-style:italic; }
+
+/* ── builder chrome (NOT part of the final upsell — strip on render) ── */
+.posnav{ display:flex; gap:6px; background:#0e1620; padding:8px 10px; }
+.ptab{ flex:1; text-align:center; text-decoration:none; color:#9fb0c2; background:#1b2735;
+ border-radius:9px; padding:9px 6px; font-size:13px; font-weight:800; line-height:1.05; }
+.ptab small{ display:block; font-weight:600; font-size:9.5px; opacity:.65; margin-top:3px; letter-spacing:.02em; }
+.ptab.on{ background:var(--green); color:#06210e; }
+.ptab.on small{ opacity:.85; }
+.posbrief{ max-width:600px; margin:0 auto; padding:14px 22px 0; }
+.pb-badge{ display:inline-block; background:#23201c; color:#fff; font-size:11px; font-weight:800;
+ letter-spacing:.08em; padding:4px 11px; border-radius:999px; text-transform:uppercase; }
+.posbrief.ds .pb-badge{ background:var(--red); }
+.pb-job{ font-size:14px; color:#5a534a; margin:9px 0 0; line-height:1.5; }
+.pb-note{ font-size:11.5px; color:var(--muted); font-style:italic; border-top:1px dashed var(--line);
+ padding-top:8px; margin-top:10px; }
+</style></head>
+<body>
+
+
+<div class="sticky">
+  
+  <div class="progress">
+    <div class="ptrack"><div class="pfill"></div></div>
+    <div class="psteps"><span class="on">Order Approved</span><span class="on">Customize Order</span><span>Final Confirmation</span></div>
+  </div>
+  <div class="topbar"><b>IMPORTANT: Do NOT Close This Window Or Click The &ldquo;Back&rdquo; Button</b> — it may double-bill your card</div>
+</div>
+
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Bruises from nowhere. Marks that stay for weeks. Not your skin &mdash; <span class="red">your blood.</span></h1>
+    <p class="subhead b">{{first_name}}, wait &mdash; one last thing before your Nurovita order ships.</p>
+    <p class="bigidea">The outside is being built. Today is about <span class="red">the inside.</span></p>
+    <div class="photo">[PHOTO &mdash; HERO (dopamine, Roller win): the order-confirmed moment into her daily ritual &mdash; a woman 50+ glancing at the &ldquo;Order Confirmed&rdquo; screen on her phone, then the Cooling Roller in hand, warm morning light, calm confidence on her face. NO before/after panels. Show the ROLLER ONLY &mdash; never reveal or hint at the Oil or the softgel.]</div>
+  </div>
+
+
+  <section>
+    <div class="tag">1 &middot; Congratulations / Validate</div>
+    <h2>&#127881; Your Cooling Roller Is Officially On Its Way &#127881;</h2>
+    <p class="frag">That was the right call.</p>
+    <p class="line">From your very first 30-second roll, it&rsquo;s waking quiet collagen cells and rebuilding your cushion from below.</p>
+    <p class="line">A few weeks in, your fingers will find something firmer where the crepe used to be.</p>
+    <p class="line b">That&rsquo;s when you&rsquo;ll believe it.</p>
+    <p class="line">Every firmer inch it builds is yours to keep &mdash; permanently, unconditionally.</p>
+    <div class="photo">[PHOTO: a real customer&rsquo;s OWN before/after of her forearm &mdash; phone-shot at the bathroom mirror, honest lighting, NOT studio; the Roller win the lines just promised, testimonial feel.]</div>
+  </section>
+
+
+  <section>
+    <div class="tag">2 &middot; Transformation Promise</div>
+    <h2>Now picture trusting your body again &mdash; all the way through</h2>
+
+    <p class="line">Picture the inside dream:</p>
+
+    <p class="line">Instead of a new purple mark and a week of wondering&hellip;</p>
+    <p class="line b">You look down &mdash; and there&rsquo;s nothing to explain.</p>
+
+    <p class="line">Instead of skin that marks if you look at it wrong&hellip;</p>
+    <p class="line b">The bump, the scratch, the dog&rsquo;s happy hello &mdash; nothing comes of it.</p>
+
+    <p class="line">Instead of short sleeves that come with a story&hellip;</p>
+    <p class="line b">You wear them. And forget them.</p>
+
+    <p class="line b">No more mystery bruises&hellip;</p>
+    <p class="line b">No more counting in the bathroom light&hellip;</p>
+    <p class="line b">No more flinching.</p>
+
+    <p class="line b">But between you and that picture stands something you&rsquo;ve never met&hellip;</p>
+  </section>
+
+
+  <section>
+    <div class="tag">3 &middot; The Third Enemy</div>
+    <h2>Look at your arms right now. <span class="red">Anything you can&rsquo;t explain?</span></h2>
+    <div class="photo">[PHOTO: the MOMENT it strikes &mdash; a woman 50+ at the bathroom sink in morning light, sleeve pushed up, frozen mid-glance at a fresh purple bruise on her forearm she cannot account for; more puzzled than hurt. Real and intimate, NOT a diagram.]</div>
+    <p class="line">In their own words:</p>
+    <p class="line">&ldquo;I&rsquo;m a walking rainbow&hellip; no wonder old ladies cover everything up.&rdquo;</p>
+    <p class="line">&ldquo;I look like a Dalmatian.&rdquo;</p>
+    <p class="line">&ldquo;My husband always jokes that people will think he beat me up.&rdquo;</p>
+    <p class="line">&ldquo;I go to the bathroom and look down and wonder what my legs get up to that I don&rsquo;t know about.&rdquo;</p>
+    <p class="line">They joke so they don&rsquo;t cry.</p>
+    <p class="line">And it moved in fast: &ldquo;I swear when I turned 50 immediately got crepey skin! Never had it and it appeared overnight.&rdquo; Another: &ldquo;aged overnight&hellip; 35 to 45 in a day.&rdquo;</p>
+    <p class="line b">Skin doesn&rsquo;t do that on its own. That speed is a signature: something active, working every hour.</p>
+    <p class="line b">It isn&rsquo;t in your skin. It circulates. And it has a name.</p>
+  </section>
+
+
+<section>
+  <div class="tag">4 &middot; It&rsquo;s Not The Hero&rsquo;s Fault</div>
+  <h2>&ldquo;Inflammaging&rdquo; &mdash; the silent fire in your blood. <span class="red">Never your Roller&rsquo;s job</span> to put out</h2>
+  <p class="line b">Your Cooling Roller? It works. It&rsquo;s winning &mdash; and nothing on this page changes that.</p>
+  <p class="line">This is something else. Doctors call it <b>Inflammaging</b>: chronic, low-grade inflammation building up in your bloodstream with age &mdash; body-wide, every hour.</p>
+  <p class="line">The people living with it reach for the same pictures: &ldquo;a silent fire that keeps burning in the background&rdquo;&hellip; &ldquo;smoke inside your house that never clears.&rdquo;</p>
+  <p class="line b">Creams and rollers work ON the skin. That&rsquo;s their job, and yours are doing it beautifully.</p>
+  <p class="line b">This lives in the bloodstream &mdash; a place nothing applied to skin was ever meant to reach. Not their failure. Never their job.</p>
+  <div class="xbox">
+    <p class="xline">It wears at the capillary walls that keep skin from bruising &mdash; one soft bump blooms purple&hellip;</p>
+    <p class="xline">It slows the fade &mdash; a mark that cleared in days now stays for weeks&hellip;</p>
+  </div>
+  <p class="line b">And it climbs with age, never clearing on its own. Every unguarded month is another month of its damage.</p>
+  <div class="photo">[PHOTO: the THIRD ENEMY shown LITERALLY &mdash; inside a blood vessel: an ember-lit haze of inflammatory particles drifting through the bloodstream like smoke filling a house, brushing past thinning capillary walls. Body-wide, quiet, untouched &mdash; the one place no cream, oil or roller ever enters. Unmistakably ON SCREEN, not implied.]</div>
+</section>
+
+
+<section>
+  <div class="tag">5 &middot; Proof / Break The Cycle</div>
+  <h2>The women ahead of you already swallow their answer &mdash; <span class="red">on purpose</span></h2>
+  <p class="line">&ldquo;I started taking turmeric pills and works great&hellip; I realized I need to take them everyday.&rdquo;</p>
+  <p class="line">&ldquo;I have found that turmeric/curcumin/bioperine works really nicely for inflammation.&rdquo;</p>
+  <p class="line">&ldquo;Post covid, I took truckloads of vit c and zinc&hellip; and astragulus for the inflammation.&rdquo;</p>
+  <p class="line b">Nobody rubs these on. The fire is in the blood &mdash; the mouth is the only door in.</p>
+  <div class="photo">[PHOTO: the mechanism made visible, no people &mdash; inside the vessel, scissor-shaped enzymes snipping smoky inflammatory strands apart while a calm golden clarity spreads behind them; the fire turned down from within.]</div>
+  <p class="line">When the load drops, friends notice: &ldquo;One of my friends even asked me if I got botox (I haven&rsquo;t) because my wrinkles are even less prominent with the reduced inflammation.&rdquo;</p>
+  <p class="line b">Load down, body calmer. That&rsquo;s the pattern.</p>
+</section>
+
+
+<section>
+  <div class="tag">5B &middot; Realization Bridge</div>
+  <h2>&ldquo;At my age, is it even worth starting?&rdquo;</h2>
+  <p class="line">One woman asked it straight: &ldquo;I&rsquo;m 77, is it too late for me?&rdquo;</p>
+  <p class="line b">The good news hiding inside the bad: a fire is active. And active things can be turned down.</p>
+  <p class="line">Fresh collagen is forming right now &mdash; your Roller&rsquo;s doing. Never too late to guard something brand-new.</p>
+  <div class="xbox">
+    <p class="xline">If we wanted the marks arriving slower than they fade&hellip;</p>
+    <p class="xline">If we wanted the load lowered, not left to climb&hellip;</p>
+    <p class="xline">If we wanted the inside guarded while the outside is rebuilt&hellip;</p>
+  </div>
+  <p class="line b">We had to go in through the inside &mdash; on top of everything you have. Never instead.</p>
+</section>
+
+
+<section>
+  <div class="tag">6 &middot; Product Reveal</div>
+  <h2>Meet Nurovita Lymphatic Support &mdash; the guard we built for the blood</h2>
+  <p class="line">Three small softgels a day, for the one territory nothing in your routine was asked to cover.</p>
+  <div class="photo">[PHOTO: TWO-UP CONTRAST, side by side &mdash; this split IS the image. LEFT = the Cooling Roller on skin, big label &ldquo;BUILD &mdash; the outside&rdquo;. RIGHT = the Lymphatic Support bottle over a subtle bloodstream motif, big label &ldquo;GUARD &mdash; the inside&rdquo;. One female silhouette between them &mdash; two territories, one body. BOTH labels visible. No other product shown.]</div>
+  <div class="greenbox">
+    <p class="gline">&#9989; <b>Lowers the Inflammaging load</b> circulating in your blood &mdash; body-wide, from within.</p>
+    <p class="gline">&#9989; <b>Guards the capillary walls</b> that keep skin from bruising at every bump.</p>
+    <p class="gline">&#9989; <b>Reaches every inch of you</b> &mdash; from within.</p>
+  </div>
+  <p class="line">And no &mdash; this isn&rsquo;t collagen in a pill. Its job is in the bloodstream &mdash; swallowing is simply the only route in.</p>
+  <p class="line b">The Roller builds the outside. The softgel guards the inside. Two territories. One body. Yours.</p>
+</section>
+
+
+  <section>
+    <div class="tag">7 &middot; How It Works / Ease</div>
+    <h2>Three ingredients. Three softgels. <span class="red">One job.</span></h2>
+    <p class="frag">Open the label &mdash; it reads clean.</p>
+    <div class="leadline">BROMELAIN &mdash; the scissors</div>
+    <p class="line">An enzyme from the pineapple plant. The load rides on inflammatory proteins circulating in your blood &mdash; Bromelain cuts them apart, right where they travel.</p>
+    <p class="line">WebMD is direct about it: bromelain&rsquo;s anti-inflammatory properties may help ease pain and calm inflammation.</p>
+    <div class="leadline">TURMERIC &mdash; the damper</div>
+    <p class="line">The golden root the women above already swear by &mdash; here, turning the whole body-wide load down.</p>
+    <p class="line">Cleveland Clinic puts it plainly: the curcumin in turmeric &ldquo;has anti-inflammatory properties&rdquo; and &ldquo;may be beneficial for chronic conditions where inflammation starts to affect tissues in your body.&rdquo;</p>
+    <div class="leadline">ASTRAGALUS &mdash; the keeper</div>
+    <p class="line">A root with generations of traditional use. The steady one &mdash; holding the load low for the years ahead.</p>
+    <p class="line">Healthline reports a review of studies found astragalus reduced levels of pro-inflammatory cytokines &mdash; the same messengers behind the load.</p>
+    <p class="line b">The routine: three softgels, once a day, with food. That&rsquo;s it.</p>
+    <p class="line">One woman, about her naturopath: &ldquo;no one will consistently take more than 5 supplements, so she never prescribes more than three or four.&rdquo;</p>
+    <div class="leadline">The turmeric question &mdash; answered, not buried:</div>
+    <p class="line">&ldquo;I questioned my doctor about taking Turmeric when she put me on Eliquis. She said to discontinue the Turmeric because it acts to thin the blood.&rdquo;</p>
+    <p class="line b">A fair question. The straight answer: turmeric can add to the effect of blood-thinning medication.</p>
+    <p class="line">Take your softgels with food. And if you&rsquo;re on a blood thinner &mdash; Eliquis, warfarin, any of them &mdash; run it past your doctor first. We&rsquo;d rather you check than guess.</p>
+    <div class="leadline">In their words:</div>
+    <p class="line">&ldquo;I&rsquo;ve bought enough wonder pills to know better &mdash; I almost skipped this. Two months in, the marks fade quicker, and I&rsquo;ve stopped checking my arms.&rdquo; &mdash; Ruth B.</p>
+    <p class="line">&ldquo;A cereal bowl of pills? Not me. But this is three softgels with my eggs &mdash; and my skin doesn&rsquo;t feel like tissue paper anymore.&rdquo; &mdash; Kathleen D.</p>
+  </section>
+
+
+  <section>
+    <div class="tag">8 &middot; If You Skip</div>
+    <h2>If you pass today, here&rsquo;s the honest picture</h2>
+    <p class="line b">Your Roller keeps building, and every firmer inch stays yours. That is never at stake.</p>
+    <p class="line">But the load doesn&rsquo;t know you passed. It keeps its schedule:</p>
+    <div class="xbox">
+      <p class="xline">Another season of marks that arrive out of nowhere and overstay&hellip;</p>
+      <p class="xline">Another year of capillary walls thinning under a load that never pauses&hellip;</p>
+    </div>
+    <p class="line">Its damage stays in its own lane &mdash; and left alone, that lane gets busier.</p>
+    <p class="line b">Said plain: this is a guard, not a spell. Every month on it is a month the load stays low &mdash; the same deal the turmeric women live by.</p>
+  </section>
+
+
+  <section>
+    <div class="tag">9 &middot; Value Anchor</div>
+    <h2>What&rsquo;s a guarded inside worth?</h2>
+    <p class="line">A truth most pages hide, straight from dermatology: &ldquo;collagen stimulation takes several months, five to six months, and you have to be patient.&rdquo;</p>
+    <p class="line b">So these months are exactly the season to keep the load low.</p>
+    <p class="line">In its own lane, guarding feels like:</p>
+    <div class="greenbox">
+      <p class="gline">&#9989; Marks that used to sit for weeks start fading quicker.</p>
+      <p class="gline">&#9989; The tissue-paper feeling eases &mdash; a bump stays just a bump.</p>
+      <p class="gline">&#9989; And the quiet one: you stop checking your arms. Trust comes back.</p>
+    </div>
+    <p class="line">Now price the alternatives. In-office anti-inflammatory treatments run hundreds a visit &mdash; and repeat. Red-light panels start around $300. A collagen-powder habit eats $40 a month, for years.</p>
+    <p class="line b">Against that &mdash; would a daily inside guard be worth $300? $200? Even $100?</p>
+      </section>
+
+
+  <section>
+    <div class="tag">10 &middot; Price</div>
+    <h2>Add it now &mdash; at the lowest price it will ever carry</h2>
+    <div class="leadline">One-time. This page only. No subscription.</div>
+    <p class="line">You&rsquo;ve seen what the category charges &mdash; this page asks a fraction of one office visit. Leave, and the price leaves too.</p>
+    <div class="pricebox">
+      <div class="price-h">Choose your supply &mdash; one-time only.</div>
+      <div class="photo">[PHOTO: the Lymphatic Support softgels in three pack tiers side by side &mdash; 1 / 3 / 2 bottles on a clean white studio sweep; 3-pack flagged; red SAVE-% starburst top-right; FREE SHIPPING ribbon. Real product render, no people.]</div>
+      <!-- prices pending Michael; merge fields intact -->
+      <div class="bignote">A <b>one-time</b> add-on &mdash; no subscription, no auto-billing. It ships in the same box as your Cooling Roller.</div>
+      <div class="packs">
+
+
+        <div class="pack">
+          <div class="pack-top"><span class="pack-name">1 Bottle Lymphatic Support</span><span class="pack-badge">Try It</span></div>
+          <div class="modes">
+            <div class="mode">
+              <div class="mode-label">One-Time</div>
+              <div class="mode-price"><b>${{p1_onetime_unit}}</b> / bottle</div>
+              <div class="mode-total">Total ${{p1_onetime_total}} &nbsp;<s>${{p1_was}}</s></div>
+              <div class="addbtn">Yes! Add to Order!</div>
+            </div>
+          </div>
+          <div class="pack-foot">{{shipping line}} &middot; 90-Day Money-Back Guarantee INCLUDED</div>
+        </div>
+
+
+        <div class="pack rec">
+          <span class="ribbon">MOST POPULAR</span>
+          <div class="pack-top"><span class="pack-name">3 Bottles Lymphatic Support</span><span class="pack-badge">Best Value</span></div>
+          <div class="modes">
+            <div class="mode">
+              <div class="mode-label">One-Time</div>
+              <div class="mode-price"><b>${{p2_onetime_unit}}</b> / bottle</div>
+              <div class="mode-total">Total ${{p2_onetime_total}} &nbsp;<s>${{p2_was}}</s></div>
+              <div class="addbtn">Yes! Add to Order!</div>
+            </div>
+          </div>
+          <div class="pack-foot">{{shipping line}} &middot; 90-Day Money-Back Guarantee INCLUDED</div>
+        </div>
+
+
+        <div class="pack">
+          <div class="pack-top"><span class="pack-name">2 Bottles Lymphatic Support</span><span class="pack-badge">Step Up</span></div>
+          <div class="modes">
+            <div class="mode">
+              <div class="mode-label">One-Time</div>
+              <div class="mode-price"><b>${{p3_onetime_unit}}</b> / bottle</div>
+              <div class="mode-total">Total ${{p3_onetime_total}} &nbsp;<s>${{p3_was}}</s></div>
+              <div class="addbtn">Yes! Add to Order!</div>
+            </div>
+          </div>
+          <div class="pack-foot">{{shipping line}} &middot; 90-Day Money-Back Guarantee INCLUDED</div>
+        </div>
+
+      </div>
+      <p class="taxnote">plus applicable sales tax</p>
+      <div class="pay">[ PayPal &middot; Mastercard &middot; Visa &middot; Discover &middot; Amex &middot; Apple Pay &middot; Google Pay &middot; Secure Checkout ]</div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="tag">11 &middot; Guarantee</div>
+    <h2>You get the full 90 days. We carry all the risk.</h2>
+    <div class="photo">[PHOTO: a circular gold-foil 90-Day Money-Back Guarantee seal &mdash; ribbon banner across the middle, embossed checkmark, soft shadow on the cream background. Trust badge only, no product.]</div>
+    <p class="line">You&rsquo;ve read the label and heard the doctor question answered. One thing left: your own arms.</p>
+    <p class="line b">Take the full 90 days.</p>
+    <div class="xbox">
+      <p class="xline">&#10060; If the out-of-nowhere marks don&rsquo;t start fading quicker&hellip;</p>
+      <p class="xline">&#10060; If your skin still feels like tissue paper &mdash; easy to mark, easy to tear&hellip;</p>
+      <p class="xline">&#10060; If that settled, guarded-from-within feeling never comes&hellip;</p>
+    </div>
+    <p class="line b">&hellip;then we don&rsquo;t deserve your money, and we won&rsquo;t keep it. One email &mdash; every cent walks back to your card. No forms, no phone maze, no hard feelings.</p>
+  </section>
+
+
+  <section>
+    <div class="tag">12 &middot; Scarcity</div>
+    <h2>One page. One price. Then it&rsquo;s gone.</h2>
+    <p class="line b">This discount can&rsquo;t follow you out.</p>
+    <p class="line">Come back later, it&rsquo;s full retail &mdash; and the load kept every day in between.</p>
+    <p class="line">Decide here, while the page is open.</p>
+  </section>
+
+
+  <section>
+    <div class="tag">13 &middot; Final CTA</div>
+    <h2>You&rsquo;re not saying yes. You&rsquo;re saying <span class="red">maybe</span> &mdash; for 90 days.</h2>
+    <div class="photo">[PHOTO: the Lymphatic Support 3-pack, big and centered &mdash; a yellow struck-through was-price circle beside a red now-price circle; bright, hopeful morning-kitchen lighting (the breakfast ritual). Real render, no people.]</div>
+    <p class="line">The button below adds the softgels to the box already coming &mdash; and starts a 90-day window judged by your own arms.</p>
+    <div class="greenbox">
+      <p class="gline">&#9989; Maybe the mystery marks fade faster &mdash; and you keep it.</p>
+      <p class="gline">&#9989; Maybe the tissue-paper feeling eases &mdash; and you keep it.</p>
+      <p class="gline">&#9989; Maybe one morning there&rsquo;s nothing to explain &mdash; and you keep it.</p>
+    </div>
+    <p class="line b">None of it happens? Say so &mdash; every cent comes back. That&rsquo;s what maybe means.</p>
+    <p class="line">It ships in the same box as your Cooling Roller &mdash; bottle lands, breakfast happens, three softgels go down.</p>
+    <p class="line">We recommend the 3-pack &mdash; it covers your whole 90-day maybe, at about ${{per_day}} a day. Less than your after-dinner square of dark chocolate.</p>
+    <div class="pricebox">
+      <div class="price-h">Say maybe &mdash; choose your package</div>
+      <div class="photo">[PHOTO: the same Lymphatic Support 3-pack with the red SAVE-% badge &mdash; identical treatment to the Price section, for visual consistency.]</div>
+      <!-- prices pending Michael; merge fields intact -->
+      <div class="bignote">A <b>one-time</b> add-on &mdash; no subscription, no auto-billing. It ships in the same box as your Cooling Roller.</div>
+      <div class="packs">
+
+
+        <div class="pack">
+          <div class="pack-top"><span class="pack-name">1 Bottle Lymphatic Support</span><span class="pack-badge">Try It</span></div>
+          <div class="modes">
+            <div class="mode">
+              <div class="mode-label">One-Time</div>
+              <div class="mode-price"><b>${{p1_onetime_unit}}</b> / bottle</div>
+              <div class="mode-total">Total ${{p1_onetime_total}} &nbsp;<s>${{p1_was}}</s></div>
+              <div class="addbtn">Yes! Add to Order!</div>
+            </div>
+          </div>
+          <div class="pack-foot">{{shipping line &mdash; e.g. Shipping <s>$X</s> FREE &mdash; or delete}} &middot; 90-Day Money-Back Guarantee INCLUDED</div>
+        </div>
+
+
+        <div class="pack rec">
+          <span class="ribbon">MOST POPULAR</span>
+          <div class="pack-top"><span class="pack-name">3 Bottles Lymphatic Support</span><span class="pack-badge">Best Value</span></div>
+          <div class="modes">
+            <div class="mode">
+              <div class="mode-label">One-Time</div>
+              <div class="mode-price"><b>${{p2_onetime_unit}}</b> / bottle</div>
+              <div class="mode-total">Total ${{p2_onetime_total}} &nbsp;<s>${{p2_was}}</s></div>
+              <div class="addbtn">Yes! Add to Order!</div>
+            </div>
+          </div>
+          <div class="pack-foot">{{shipping line}} &middot; 90-Day Money-Back Guarantee INCLUDED</div>
+        </div>
+
+
+        <div class="pack">
+          <div class="pack-top"><span class="pack-name">2 Bottles Lymphatic Support</span><span class="pack-badge">Step Up</span></div>
+          <div class="modes">
+            <div class="mode">
+              <div class="mode-label">One-Time</div>
+              <div class="mode-price"><b>${{p3_onetime_unit}}</b> / bottle</div>
+              <div class="mode-total">Total ${{p3_onetime_total}} &nbsp;<s>${{p3_was}}</s></div>
+              <div class="addbtn">Yes! Add to Order!</div>
+            </div>
+          </div>
+          <div class="pack-foot">{{shipping line}} &middot; 90-Day Money-Back Guarantee INCLUDED</div>
+        </div>
+
+      </div>
+      <p class="taxnote">plus applicable sales tax</p>
+      <div class="pay">[ PayPal &middot; Mastercard &middot; Visa &middot; Discover &middot; Amex &middot; Apple Pay &middot; Google Pay &middot; Secure Checkout ]</div>
+    </div>
+    <div class="decline"><i>No thanks&hellip; I understand the Inflammaging load in my blood keeps climbing untouched &mdash; and that this one-time price disappears with this page.</i></div>
+  </section>
+
+
+  <div class="foot">
+    <div class="photo">[PHOTO: Nurovita product banner — full line]</div>
+    <div class="dis">{{compliance_disclaimer — legal/compliance fills the category-correct disclaimer; NOT written by the copy team}}</div>
+    Nurovita — Copyright 2026 — All Rights Reserved.<br>
+    Privacy Policy | Terms Of Service | Return Policy<br>
+    {{support_phone}} &middot; {{support_email}}<br><br>
+    Powered by CheckoutChamp
+  </div>
+
+</div></body></html>
