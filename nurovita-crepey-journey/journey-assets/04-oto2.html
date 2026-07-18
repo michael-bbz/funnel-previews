@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nurovita — Customize Your Order</title>
+<!--
+  OTO1 WARMING OIL — DRAFT v1 (assembled from WORKING-COPY.md, 100% Michael-locked 2026-07-15)
+  Shell: UPSELL-TEMPLATE-MASTER.html (untouched CSS/skeleton) · Copy: locked HERO→§13 + decline
+  Offer: 5 × $29.90 = $149.50 (was $249.50, SAVE $100) — single pre-selected pack, one-time only
+  Remaining placeholders: {{first_name}} (runtime), {{support_phone}}, {{support_email}}, compliance disclaimer, photos
+-->
+<style>
+:root{
+ --ink:#23201c; --muted:#9a9389; --line:#e8e3d9; --paper:#fff; --wash:#faf8f4;
+ --navy:#1f2d4a; --green:#37a04f; --greentrack:#dceede; --greenbg:#f3faf4; --greenln:#bfe3c6;
+ --cream:#fbf6ec; --creamln:#ece2cd; --red:#d23b29; --blue:#1f3a5a; --bluebg:#eaf3fb;
+}
+*{ box-sizing:border-box; }
+body{ margin:0; background:var(--wash); color:var(--ink);
+ font:18px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+.sticky{ position:sticky; top:0; z-index:50; }
+.progress{ background:#16202e; padding:13px 14px 9px; }
+.ptrack{ height:14px; border-radius:8px; background:#33404f; overflow:hidden; max-width:760px; margin:0 auto; }
+.pfill{ height:100%; width:70%; border-radius:8px;
+ background:repeating-linear-gradient(45deg,var(--green) 0 12px,#2e8b44 12px 24px); }
+.psteps{ max-width:760px; margin:7px auto 0; display:flex; justify-content:space-between;
+ color:#9fb0c2; font-size:11px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; }
+.psteps .on{ color:#fff; }
+.topbar{ background:var(--navy); color:#fff; text-align:center; padding:11px 16px; font-size:13.5px; line-height:1.4; }
+.topbar b{ color:#fff; }
+.wrap{ max-width:600px; margin:0 auto; padding:0 22px 80px; }
+.hero{ padding:26px 0 4px; }
+.hero h1{ font-size:30px; line-height:1.18; font-weight:900; margin:0 0 18px; letter-spacing:-.01em; }
+.red{ color:var(--red); }
+u{ text-decoration-thickness:2px; text-underline-offset:3px; }
+.subhead{ font-size:16px; color:#4b463e; margin:0 0 18px; }
+.subhead.b{ font-weight:800; color:var(--ink); font-size:17px; }
+section{ padding:30px 0; border-bottom:1px solid var(--line); }
+.tag{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; font-weight:700; }
+h2{ font-size:25px; line-height:1.25; margin:0 0 16px; font-weight:800; letter-spacing:-.01em; }
+.line{ margin:0 0 15px; }
+.line.b{ font-weight:800; }
+.frag{ font-weight:800; margin:0 0 6px; }
+.photo{ border:2px dashed #cfc8bb; background:#f4f1ea; color:#8a8378; border-radius:10px;
+ padding:18px; margin:0 0 18px; font-size:13px; font-style:italic; text-align:center; }
+.leadline{ margin:22px 0 12px; font-size:18px; font-weight:800; }
+.tcard{ background:var(--cream); border:1px solid var(--creamln); border-radius:14px; padding:18px 18px 14px; margin:0 0 16px; }
+.thead{ display:flex; gap:12px; align-items:center; margin-bottom:10px; }
+.avatar{ width:42px; height:42px; border-radius:50%; background:#e7dcc7; flex:0 0 auto; }
+.tname{ font-weight:800; font-size:15px; } .stars{ font-size:13px; }
+.verif{ font-size:11.5px; color:var(--muted); font-style:italic; }
+.tquote{ margin:0; font-style:italic; color:#403b34; line-height:1.55; }
+.greenbox{ background:var(--greenbg); border:1.5px solid var(--greenln); border-radius:14px; padding:18px 20px; margin:6px 0 18px; }
+.gline{ margin:0 0 12px; } .gline:last-child{ margin-bottom:0; }
+.xbox{ margin:6px 0 16px; } .xline{ margin:0 0 12px; color:var(--ink); }
+.pricebox{ background:#fff; border:1.5px solid var(--line); border-radius:16px; padding:22px 20px; margin:18px 0 4px; text-align:center; }
+.price-h{ font-size:18px; font-weight:800; margin-bottom:14px; }
+.bigprice{ font-size:30px; } .bigprice b{ font-weight:900; }
+.wasprice{ color:var(--muted); margin:2px 0 14px; }
+.checks{ list-style:none; padding:0; margin:0 auto 18px; text-align:left; max-width:340px; }
+.checks li{ margin:0 0 10px; }
+.cta{ background:var(--navy); color:#fff; font-weight:800; font-size:18px; border-radius:12px; padding:16px 18px; cursor:pointer; }
+.cta span{ display:block; font-weight:500; font-size:12px; opacity:.85; margin-top:4px; }
+.onetime{ color:var(--muted); margin:10px 0 8px; font-size:14px; }
+.pay{ color:#b7b0a4; font-size:11.5px; }
+.decline{ text-align:center; color:var(--muted); margin:22px 0 0; font-size:14.5px; line-height:1.5; }
+.foot{ text-align:center; color:var(--muted); font-size:12.5px; line-height:1.6; padding:26px 10px 0; }
+.foot .dis{ font-size:11.5px; margin-bottom:12px; }
+s{ color:var(--muted); }
+.bigidea{ font-size:20px; font-weight:800; line-height:1.3; margin:0 0 16px; }
+.bigidea .red{ color:var(--red); }
+.packs{ display:grid; gap:15px; margin:6px 0 2px; text-align:left; }
+.pack{ position:relative; border:1.5px solid var(--line); border-radius:14px; padding:15px 16px; background:#fff; }
+.pack.rec{ border:2px solid var(--green); box-shadow:0 6px 18px rgba(55,160,79,.12); }
+.ribbon{ position:absolute; top:-11px; left:16px; background:var(--green); color:#06210e;
+ font-size:10.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:3px 10px; border-radius:999px; }
+.pack-top{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:11px; }
+.pack-name{ font-weight:800; font-size:16px; }
+.pack-badge{ font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+ color:#06210e; background:var(--greentrack); border-radius:999px; padding:3px 9px; white-space:nowrap; }
+.modes{ display:grid; gap:10px; }
+.mode{ border:1px solid var(--line); border-radius:10px; padding:11px 12px; }
+.mode-label{ font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; color:#5a534a; margin-bottom:5px; }
+.mode-price{ font-size:22px; } .mode-price b{ font-weight:900; }
+.mode-total{ font-size:13px; color:var(--muted); margin:2px 0 10px; }
+.addbtn{ background:var(--navy); color:#fff; text-align:center; font-weight:800; font-size:15px; border-radius:10px; padding:12px; cursor:pointer; }
+.pack-foot{ font-size:11.5px; color:#6a6358; margin-top:10px; line-height:1.5; }
+.taxnote{ font-size:11px; color:var(--muted); text-align:center; margin:11px 0 0; font-style:italic; }
+</style></head>
+<body>
+
+<div class="sticky">
+  <div class="progress">
+    <div class="ptrack"><div class="pfill"></div></div>
+    <div class="psteps"><span class="on">Order Approved</span><span class="on">Customize Order</span><span>Final Confirmation</span></div>
+  </div>
+  <div class="topbar"><b>IMPORTANT: Do NOT Close This Window Or Click The &ldquo;Back&rdquo; Button</b> — it may double-bill your card</div>
+</div>
+
+<div class="wrap">
+
+    <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <p class="subhead b">WAIT! You&rsquo;re Not Done Yet&hellip;</p>
+    <h1>Before We Ship Your Natural Cooling Roller&hellip; There&rsquo;s <span class="red">Something Important You Need To Know</span></h1>
+    <div class="photo">[PHOTO: woman 50+ at the mirror — puffy morning face / heavy legs moment]</div>
+  </div>
+
+  <!-- ═══ 1 · CONGRATS ═══ -->
+  <section>
+    <h2>&#127881; Congratulations again on choosing Nurovita!</h2>
+    <p class="line">Our team is preparing your Natural Cooling Roller right now.</p>
+    <p class="line">You&rsquo;re about to start rebuilding your collagen.</p>
+    <p class="line">Your skin transformation is about to begin.</p>
+    <p class="line">If you added the night-time routine, you&rsquo;ll see results even faster.</p>
+    <p class="line b">But before we pack your order&hellip; there&rsquo;s one question we have to ask you first.</p>
+  </section>
+
+  <!-- ═══ 1B · THE CHECKLIST ═══ -->
+  <section>
+    <h2>Have You Ever Experienced Any Of These?</h2>
+    <div class="xbox">
+      <p class="xline">- Bloating that comes and goes — no matter what you eat</p>
+      <p class="xline">- Legs that feel heavy, or look puffier by evening</p>
+      <p class="xline">- A puffy face when you wake up</p>
+      <p class="xline">- Swelling around your ankles that won&rsquo;t go away</p>
+      <p class="xline">- Brain fog — walking into a room and forgetting why</p>
+      <p class="xline">- Skin that looks loose and puffy at the same time</p>
+    </div>
+    <p class="line">If you nodded at even ONE of these&hellip;</p>
+    <p class="line">It&rsquo;s not random. And it&rsquo;s not &ldquo;just aging.&rdquo;</p>
+    <p class="line b">It means your lymphatic system — your body&rsquo;s cleanup crew — has turned sluggish and CLOGGED.</p>
+    <div class="photo">[PHOTO: the clogged cleanup system under the skin — simple illustration]</div>
+  </section>
+
+  <!-- ═══ 2 · THE ENEMY ═══ -->
+  <section>
+    <h2>And Here&rsquo;s What A <span class="red">Clogged Lymphatic System</span> Does To The Collagen You&rsquo;re About To Rebuild</h2>
+    <div class="photo">[PHOTO: illustrated villain-style — the clogged lymphatic system reaching for fresh collagen under the skin]</div>
+    <p class="line">Because aging didn&rsquo;t just make your collagen dormant — it made your body&rsquo;s whole cleanup system CLOGGED.</p>
+    <p class="line">The waste it&rsquo;s supposed to clear starts building up&hellip; and that buildup feeds a quiet, constant inflammation — the kind researchers link to faster collagen breakdown.</p>
+    <p class="line b">Scientists call it &ldquo;inflammaging.&rdquo;</p>
+    <p class="line">And it&rsquo;s hardest on fresh, new collagen — exactly what you&rsquo;re about to build.</p>
+    <div class="photo">[PHOTO: diagram — cleanup slows &rarr; load builds &rarr; the signs you just recognized &rarr; collagen breakdown]</div>
+  </section>
+
+  <!-- ═══ 3 · THE DISCRIMINATOR ═══ -->
+  <section>
+    <h2>So Why Do Some Women Keep Their Results For Good&hellip; While Others Lose Them The Moment They Stop?</h2>
+    <p class="line">Right now, you&rsquo;re motivated. You&rsquo;ll use your Roller every day — and your skin will show it.</p>
+    <p class="line">But let&rsquo;s be honest: weeks go by, results come in&hellip; and life happens. One day, you&rsquo;ll feel done. You&rsquo;ll stop.</p>
+    <p class="line">And that&rsquo;s okay. You shouldn&rsquo;t have to keep this up for the rest of your life. After two or three months of consistent work, you&rsquo;ll see results you love.</p>
+    <p class="line">But here&rsquo;s the most important thing.</p>
+    <p class="line">What happens AFTER you stop has nothing to do with genes. Nothing to do with diet. Nothing to do with age.</p>
+    <p class="line b">It comes down to one thing: whether your lymphatic system is clearing the load&hellip; or quietly feeding the breakdown.</p>
+  </section>
+
+  <!-- ═══ 4 · THE HINGE ═══ -->
+  <section>
+    <h2>And Now We&rsquo;re Going To Give You Something You&rsquo;ll Need To Go Beyond Transforming How Your Skin Looks&hellip; So You Can Make Sure Your Transformation Lasts For Years.</h2>
+  </section>
+
+  <!-- ═══ 5 · PRODUCT REVEAL ═══ -->
+  <section>
+    <h2>Introducing Your Guard Against Inflammaging: Nurovita Lymphatic Support</h2>
+    <div class="photo">[PHOTO: the Lymphatic Support bottle, clean white sweep]</div>
+    <p class="line">Three small softgels a day — designed specifically to work in tandem with your Roller.</p>
+    <p class="line">They guard your transformation in three ways:</p>
+    <div class="xbox">
+      <p class="xline"><b>1.</b> They get your lymphatic system — the cleanup crew — moving again.</p>
+      <p class="xline"><b>2.</b> They help clear the inflammation that&rsquo;s been feeding the breakdown.</p>
+      <p class="xline"><b>3.</b> They guard the fresh collagen you&rsquo;re building — in your legs, and everywhere a roller can&rsquo;t reach.</p>
+    </div>
+    <p class="line">So the marks fade faster. The out-of-nowhere bruises show up less and less. And the skin you rebuild&hellip; stays rebuilt.</p>
+  </section>
+
+  <!-- ═══ 6 · CONTRAST + INGREDIENTS ═══ -->
+  <section>
+    <h2>Your Roller Will Rebuild Your Collagen&hellip; These Softgels Will Make Sure You KEEP It</h2>
+    <div class="photo">[PHOTO: the Roller and the Lymphatic Support bottle together — the outside + inside team]</div>
+    <p class="line">While your Roller works on the outside, these softgels work deep within.</p>
+    <p class="line">With three trusted natural ingredients:</p>
+    <div class="xbox">
+      <p class="xline">- <b>Bromelain</b> — a natural enzyme from pineapple that helps your body clear inflammation</p>
+      <p class="xline">- <b>Turmeric</b> — the natural anti-inflammatory millions of women over 50 already take every day</p>
+      <p class="xline">- <b>Astragalus</b> — a time-honored root that helps keep your lymphatic system moving as you age</p>
+      <p class="xline">- <b>100% natural formula</b> — every ingredient naturally sourced, at the highest purity</p>
+    </div>
+    <p class="line">And to be clear: this is NOT another collagen pill.</p>
+    <p class="line">You already know most collagen you swallow gets digested before it ever reaches your skin.</p>
+    <p class="line">These softgels don&rsquo;t try to build your collagen. That&rsquo;s your Roller&rsquo;s job — and it&rsquo;s doing it.</p>
+    <p class="line b">They make sure you KEEP what you build.</p>
+  </section>
+
+  <!-- ═══ 7 · THE OBJECTION ═══ -->
+  <section>
+    <h2>Now, You Might Be Wondering&hellip; &ldquo;I Already Have My Ritual — Why Would I Need Another Product?&rdquo;</h2>
+    <p class="line">Fair question. Here&rsquo;s the honest answer:</p>
+    <p class="line">Everything you own right now works on the building side — waking collagen, feeding it, speeding it up.</p>
+    <p class="line">But inflammaging runs on the other side. The breakdown side.</p>
+    <p class="line">And no building tool — no roller, no cream, no oil — can touch that side.</p>
+    <p class="line b">These softgels are the only piece of your ritual built to work there.</p>
+  </section>
+
+  <!-- ═══ 8 · ONE FRONT ═══ -->
+  <section>
+    <h2>You Just Took Care Of The Outside. Don&rsquo;t Leave The Inside Open.</h2>
+    <p class="line">Remember what we showed you a moment ago: it&rsquo;s never the building that separates the women who keep their results&hellip; it&rsquo;s the clearing.</p>
+    <p class="line">It&rsquo;s like filling a bucket with a small hole in the bottom.</p>
+    <div class="photo">[PHOTO: simple illustration — the bucket with the small hole in the bottom]</div>
+    <p class="line">You can keep pouring in more, day after day, month after month&hellip;</p>
+    <p class="line">Or you can plug the hole once — and keep everything you pour.</p>
+    <p class="line b">New collagen takes months to fully set. Which is exactly why the guard matters most right now — while it&rsquo;s forming.</p>
+  </section>
+
+  <!-- ═══ 9 · OFFER ═══ -->
+  <section>
+    <h2>Add Your Inside Guard Before Your Order Ships</h2>
+    <p class="line">This page is the only place we offer it with your order — at the add-on price:</p>
+    <p class="line">{{oto2_unit}} a bottle.</p>
+    <p class="line b">Less than {{oto2_per_day}} a day to guard everything you&rsquo;re building.</p>
+    <div class="pricebox">
+      <div class="price-h">Guard Everything You&rsquo;re Building</div>
+      <div class="photo">[PHOTO: the 3-bottle Lymphatic Support lineup on a clean white sweep — 90-DAY GUARD ribbon, FREE SHIPPING flash]</div>
+      <div class="packs">
+        <div class="pack rec">
+          <span class="ribbon">The 90-Day Inside Guard</span>
+          <div class="pack-top"><span class="pack-name">3 &times; Nurovita Lymphatic Support</span><span class="pack-badge">90-DAY SUPPLY</span></div>
+          <div class="modes">
+            <div class="mode">
+              <div class="mode-label">Add-On Price</div>
+              <div class="mode-price"><b>{{oto2_unit}}</b> / bottle &nbsp;<s>{{oto2_was}}</s></div>
+              <div class="addbtn">YES! Add My Inside Guard</div>
+              <div class="mode-total">Total today: {{oto2_total}}</div>
+            </div>
+          </div>
+          <div class="pack-foot">3 softgels a day, with food — that&rsquo;s the whole ritual &middot; FREE Shipping — ships in the same box &middot; 90-Day Money-Back Guarantee INCLUDED</div>
+        </div>
+      </div>
+      <p class="taxnote">plus applicable sales tax</p>
+      <div class="pay">[ PayPal &middot; Mastercard &middot; Visa &middot; Discover &middot; Amex &middot; Apple Pay &middot; Google Pay &middot; Secure Checkout ]</div>
+    </div>
+  </section>
+
+  <!-- ═══ 10 · IF YOU SKIP ═══ -->
+  <section>
+    <h2>&#128680; What Happens If You Skip This?</h2>
+    <p class="line">Let&rsquo;s be honest about it:</p>
+    <p class="line">Inflammaging doesn&rsquo;t pause. The load builds a little more every year.</p>
+    <p class="line">Your rebuild keeps winning where you roll — it just has to win uphill, year after year.</p>
+    <p class="line">The skin you can&rsquo;t roll — your arms, your hands, your face — stays unguarded.</p>
+    <p class="line">And the out-of-nowhere bruises, the marks that take weeks to fade&hellip; they just keep showing up.</p>
+    <p class="line b">You&rsquo;ll be doing all that good work with one hand tied behind your back.</p>
+  </section>
+
+  <!-- ═══ 11 · IF YOU ADD ═══ -->
+  <section>
+    <h2>And If You Add The Guard?</h2>
+    <div class="photo">[PHOTO: with/without split — the guarded rebuild vs the unguarded years]</div>
+    <p class="line">You don&rsquo;t just rebuild your skin. You keep it that way — year after year.</p>
+    <p class="line">Now, picture yourself six months from now&hellip;</p>
+    <p class="line">Marks fade quicker. The mystery bruises get rarer.</p>
+    <p class="line">Your legs get the rebuild&hellip; and your arms, hands and face get the guard.</p>
+    <p class="line">Short sleeves without explaining anything. Skin you can trust again.</p>
+    <p class="line">And every morning — three small softgels with breakfast — you&rsquo;ll know you&rsquo;re not just hoping your results last&hellip;</p>
+    <p class="line b">You&rsquo;re protecting them.</p>
+  </section>
+
+  <!-- ═══ 12 · GUARANTEE ═══ -->
+  <section>
+    <h2>&#128274; Try It 100% Risk-Free For 90 Days</h2>
+    <div class="photo">[PHOTO: 90-day money-back guarantee seal]</div>
+    <p class="line">Here&rsquo;s our promise to you:</p>
+    <p class="line">We know what this does. So we&rsquo;ll take all the risk.</p>
+    <p class="line">Try Lymphatic Support for a full 90 days.</p>
+    <div class="xbox">
+      <p class="xline">&#10060; If your marks don&rsquo;t start fading quicker&hellip;</p>
+      <p class="xline">&#10060; If your skin still bruises and creases from nothing&hellip;</p>
+      <p class="xline">&#10060; If you don&rsquo;t notice the difference once your body is guarded from the inside&hellip;</p>
+    </div>
+    <p class="line">Send the bottles back — even empty — and we&rsquo;ll refund you in full. No questions asked.</p>
+    <p class="line b">Your money is never at risk. The only thing at risk is the collagen you&rsquo;re building right now.</p>
+  </section>
+
+  <!-- ═══ 13 · PRICE REPEAT + CLOSE ═══ -->
+  <section>
+    <h2>Your Order Is Almost Ready</h2>
+    <p class="line">Your Roller is being packed right now.</p>
+    <p class="line">Add the guard, and the softgels ride along in the same box — so the inside is covered from the very first week.</p>
+    <p class="line">One button. Nothing to re-enter.</p>
+    <p class="line">Let&rsquo;s recap what you&rsquo;re getting today:</p>
+    <div class="xbox">
+      <p class="xline">- 3 bottles of Nurovita Lymphatic Support — your full 90-day guard against inflammaging</p>
+      <p class="xline">- FREE shipping — same box as your Roller</p>
+      <p class="xline">- 90-day money-back guarantee — the risk stays on us</p>
+    </div>
+    <p class="line">And no pressure whatsoever. Your Roller works either way — we just don&rsquo;t want you rebuilding the hard way&hellip; when the guard is one click away.</p>
+    <div class="pricebox">
+      <div class="price-h">Guard Everything You&rsquo;re Building</div>
+      <div class="photo">[PHOTO: the 3-bottle Lymphatic Support lineup on a clean white sweep — 90-DAY GUARD ribbon, FREE SHIPPING flash]</div>
+      <div class="packs">
+        <div class="pack rec">
+          <span class="ribbon">The 90-Day Inside Guard</span>
+          <div class="pack-top"><span class="pack-name">3 &times; Nurovita Lymphatic Support</span><span class="pack-badge">90-DAY SUPPLY</span></div>
+          <div class="modes">
+            <div class="mode">
+              <div class="mode-label">Add-On Price</div>
+              <div class="mode-price"><b>{{oto2_unit}}</b> / bottle &nbsp;<s>{{oto2_was}}</s></div>
+              <div class="addbtn">YES! Add My Inside Guard</div>
+              <div class="mode-total">Total today: {{oto2_total}}</div>
+            </div>
+          </div>
+          <div class="pack-foot">3 softgels a day, with food — that&rsquo;s the whole ritual &middot; FREE Shipping — ships in the same box &middot; 90-Day Money-Back Guarantee INCLUDED</div>
+        </div>
+      </div>
+      <p class="taxnote">plus applicable sales tax</p>
+      <div class="pay">[ PayPal &middot; Mastercard &middot; Visa &middot; Discover &middot; Amex &middot; Apple Pay &middot; Google Pay &middot; Secure Checkout ]</div>
+    </div>
+    <div class="decline"><i>No thank you. I understand this is the only page where I can add the inside guard to my order — and I&rsquo;m choosing to rebuild without it.</i></div>
+  </section>
+
+<!-- ═══ FOOTER ═══ -->
+  <div class="foot">
+    <div class="photo">[PHOTO: Nurovita product banner — full line]</div>
+    <div class="dis">{{compliance_disclaimer — legal/compliance fills the category-correct disclaimer}}</div>
+    Nurovita — Copyright 2026 — All Rights Reserved.<br>
+    Privacy Policy | Terms Of Service | Return Policy<br>
+    {{support_phone}} &middot; {{support_email}}<br><br>
+    Powered by CheckoutChamp
+  </div>
+
+</div></body></html>
