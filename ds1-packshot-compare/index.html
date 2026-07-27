@@ -1,0 +1,71 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DS1 pack shot — tilt mismatch</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:Poppins,-apple-system,BlinkMacSystemFont,Arial,sans-serif;color:#07375d}
+  .wrap{max-width:1180px;margin:0 auto;padding:30px 20px 70px}
+  h1{font-size:22px;font-weight:800;margin:0 0 6px}
+  .sub{font-size:15px;line-height:1.5;opacity:.75;margin:0 0 30px;max-width:760px}
+  .stage{position:relative;padding-top:66.6667%;border:1px solid #e2e6ea;border-radius:10px;overflow:hidden;cursor:pointer}
+  .stage img{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .stage img.b{opacity:0;transition:opacity .1s linear}
+  .stage:hover img.b,.stage.on img.b{opacity:1}
+  .stage .badge{position:absolute;left:14px;top:14px;z-index:5;font-size:12px;font-weight:800;
+    letter-spacing:.05em;text-transform:uppercase;background:#07375d;color:#fff;padding:7px 12px;border-radius:6px}
+  .stage:hover .badge,.stage.on .badge{background:#2fa52f}
+  .stage:hover .badge::after,.stage.on .badge::after{content:" — FIXED"}
+  .stage .badge::after{content:" — NOW LIVE"}
+  .hint{font-size:13px;opacity:.65;margin:10px 2px 34px}
+  h2{font-size:16px;font-weight:800;margin:34px 0 12px;padding-top:22px;border-top:1px solid #eef1f4}
+  table{border-collapse:collapse;font-size:14px;margin:0 0 8px}
+  td,th{padding:7px 16px 7px 0;text-align:left;vertical-align:top}
+  th{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.04em;opacity:.6}
+  td.bad{color:#c62828;font-weight:700}
+  td.good{color:#2fa52f;font-weight:700}
+  ul{font-size:14px;line-height:1.65;padding-left:20px;margin:0 0 8px}
+  .alt{margin-top:14px}
+  .alt img{width:100%;height:auto;display:block;border:1px solid #e2e6ea;border-radius:10px}
+  .cap{font-size:13px;line-height:1.5;opacity:.72;margin:9px 2px 0}
+</style>
+<div class="wrap">
+
+  <h1>DS1 pack shot &mdash; the two outer bottles don&rsquo;t match</h1>
+  <p class="sub">The tilt itself is right and stays. The problem is that only the
+    <strong>left</strong> bottle is rotated &mdash; the right one is almost upright. So the outline is
+    lopsided in opposite directions depending on where you look, and the eye reads it as
+    &ldquo;off&rdquo; without being able to name it.</p>
+
+  <div class="stage" onclick="this.classList.toggle('on')">
+    <span class="badge"></span>
+    <img class="a" src="productph.png" alt="current">
+    <img class="b" src="productph-tilted.png" alt="fixed">
+  </div>
+  <p class="hint">Hover to flip &mdash; or tap on mobile. Watch the two outer caps.</p>
+
+  <h2>Measured</h2>
+  <table>
+    <tr><th></th><th>Left bottle</th><th>Right bottle</th><th></th></tr>
+    <tr><td>Cap top</td><td>y135</td><td>y123</td><td class="bad">right sits 12px higher</td></tr>
+    <tr><td>Base</td><td>y712</td><td>y702</td><td class="bad">left sits 10px lower</td></tr>
+    <tr><td>Cap silhouette</td><td>128px wide</td><td>114px wide</td><td class="bad">left tilted harder</td></tr>
+    <tr><td>Outline delta</td><td colspan="2">&minus;173px to +56px across the height</td><td class="bad">crosses over halfway down</td></tr>
+  </table>
+  <p class="cap">At cap height the left pushes out ~25&ndash;55px further. At body height the right pushes
+    out ~50&ndash;85px further. The group is centred fine (5px) &mdash; it is purely the flanker geometry.</p>
+
+  <h2>The fix</h2>
+  <ul>
+    <li>Both flankers are the <strong>same bottle</strong> at 94% scale &mdash; identical height, identical base line.</li>
+    <li>Tilt is <strong>kept</strong> and <strong>mirrored</strong>: left &minus;7&deg;, right +7&deg;. Equal angle, opposite direction.</li>
+    <li>Equal &plusmn;163px offset from centre. Left and right margins land within 0px.</li>
+    <li>All three labels read forward. FREE seal unchanged, same position.</li>
+  </ul>
+
+  <h2>Also looked at &mdash; no tilt at all</h2>
+  <div class="alt"><img src="productph-symmetric.png" alt="upright variant"></div>
+  <p class="cap">Perfectly symmetric but flat, and the depth is gone. <strong>Not the direction</strong> &mdash;
+    shown only so the mirrored-tilt choice above is clear. The fan is what we want.</p>
+
+</div>
