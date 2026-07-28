@@ -47,7 +47,9 @@
     <link rel="stylesheet" type="text/css" href="checkout/nurovita-warming-oil/app/desktop/css/checkout6more.css?v=99.04">
     <link rel="stylesheet" type="text/css" href="checkout/nurovita-warming-oil/app/desktop/css/common-up.css?10.99">
     <link rel="stylesheet" type="text/css" href="checkout/nurovita-warming-oil/app/desktop/css/author.css">
-    <link
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
@@ -59,7 +61,11 @@
 html, body{
     margin:0 !important;
     padding:0 !important;
+    overflow-x:hidden;
+    overflow-x:clip;
 }
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+         overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
 .warning-red{
     color:#e91111 !important;
@@ -246,7 +252,7 @@ button,
 }
 .warming-oil-content .content-section{
     padding:28px 0;
-    border-bottom:1px solid #EADFD2;
+    border-bottom:1px solid #e2e2e2;
 }
 .warming-oil-content .ups1rgt-txt{
     margin:0 0 14px !important;
@@ -442,7 +448,7 @@ body,
 }
 .warming-oil-source section{
     padding:30px 0;
-    border-bottom:1px solid #EADFD2;
+    border-bottom:1px solid #e2e2e2;
 }
 .warming-oil-source h1,
 .warming-oil-source h2,
@@ -533,16 +539,6 @@ body,
     margin:20px 0 4px;
     text-align:center;
 }
-.today-only{
-    font-family:Poppins, Arial, sans-serif;
-    color:rgb(5, 47, 85);
-    font-size:19px;
-    font-weight:800;
-    line-height:1.35;
-    margin:14px 0 12px;
-    text-align:center;
-}
-.today-only .to-was{font-weight:600;opacity:.75;white-space:nowrap;}
 .pn-free{color:#2fa52f;font-weight:800;}
 .warming-oil-source .packs{
     display:grid;
@@ -1684,7 +1680,7 @@ body,
 }
 /* restore-content-gray-separators */
 .warming-oil-source section{
-    border-bottom:1px solid #EADFD2 !important;
+    border-bottom:1px solid #e2e2e2 !important;
     padding-bottom:34px !important;
     margin-bottom:34px !important;
 }
@@ -1704,7 +1700,7 @@ body,
 }
 /* separator-consistent-spacing-final */
 .warming-oil-source section{
-    border-bottom:1px solid #EADFD2 !important;
+    border-bottom:1px solid #e2e2e2 !important;
     padding:0 0 30px !important;
     margin:0 0 30px !important;
 }
@@ -2002,9 +1998,88 @@ body,
 /* hide price badges */
 .warming-oil-source .pricebox .product-oil-photo::after{display:none !important;}
 .warming-oil-source .scarcity-price-badge{display:none !important;}
-/* hide all section borders — use hr.headline-break instead */
-.warming-oil-source section{
-    border-bottom:0 !important;
+/* Lunavia-style price burst, sits on the pack shot - variant S */
+.warming-oil-source .pricebox .product-oil-photo{position:relative !important;}
+.warming-oil-source .price-burst{
+    position:absolute;
+    left:calc(50% - 186px);          /* image is 390px, centred in a 430px box */
+    top:11px;
+    width:113px;
+    height:113px;
+    border-radius:50%;
+    background:#E4022B;
+    box-shadow:0 7px 18px rgba(0,0,0,.20);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-family:Poppins, Arial, sans-serif;
+    line-height:1;
+    z-index:3;
+    pointer-events:none;
+}
+.warming-oil-source .price-burst .pb-now{
+    color:#fff;
+    font-weight:900;
+    font-size:28px;
+    letter-spacing:-1.5px;
+    white-space:nowrap;
+}
+.warming-oil-source .price-burst .pb-now .pb-cents{
+    font-size:14px;
+    vertical-align:super;
+    letter-spacing:-.3px;
+}
+.warming-oil-source .price-burst .pb-was{
+    position:relative;
+    background:#FFE800;
+    color:#E4022B;
+    font-weight:900;
+    font-size:14px;
+    letter-spacing:-.5px;
+    padding:2px 8px 3px;
+    margin-top:8px;
+    border-radius:3px;
+    white-space:nowrap;
+}
+.warming-oil-source .price-burst .pb-was .pb-wc{
+    font-size:9px;
+    vertical-align:super;
+    letter-spacing:0;
+}
+.warming-oil-source .price-burst .pb-was::after{
+    content:"";
+    position:absolute;
+    left:9%;
+    right:9%;
+    top:50%;
+    height:2.5px;
+    background:#12121a;
+    transform:rotate(-6deg);
+    transform-origin:center;
+}
+.warming-oil-source .price-burst .pb-unit{
+    color:#fff;
+    font-weight:800;
+    font-size:8px;
+    letter-spacing:.3px;
+    text-transform:uppercase;
+    margin-top:7px;
+    opacity:.95;
+    white-space:nowrap;
+}
+@media (max-width:767px){
+    .warming-oil-source .price-burst{
+        left:calc(50% - 143px);      /* image is 300px on mobile */
+        top:9px;
+        width:96px;
+        height:96px;
+    }
+    .warming-oil-source .price-burst .pb-now{font-size:24px;letter-spacing:-1.2px;}
+    .warming-oil-source .price-burst .pb-now .pb-cents{font-size:12px;}
+    .warming-oil-source .price-burst .pb-was{font-size:12px;padding:2px 7px 2px;margin-top:6px;}
+    .warming-oil-source .price-burst .pb-was .pb-wc{font-size:8px;}
+    .warming-oil-source .price-burst .pb-unit{font-size:8px;margin-top:6px;}
 }
 </style>
 
@@ -2022,7 +2097,7 @@ body,
                 <hr class="headline-break" id="header-break">
                 <div class="content-edit-anchor warming-oil-content warming-oil-source">
     <div class="photo content-photo"><img width="1200" height="350" src="lmf.png" alt="Last minute offer" style="max-width:650px !important;width:78% !important;height:auto !important;display:block !important;margin:0 auto !important;"></div>
-    <div class="photo photo1-hero"><img width="1200" height="800" src="productph.png" alt="Nurovita product"></div>
+    <div class="photo photo1-hero"><img width="1000" height="667" src="producthero.webp" alt="Nurovita product"></div>
 <style>
 .coupon-bar{width:100%;max-width:900px;margin:-34px auto 34px;border-radius:0 0 10px 10px;overflow:hidden;box-sizing:border-box;display:flex;align-items:stretch;}
 .coupon-left{background:#07375d;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:14px 20px;flex:0 0 auto;}
@@ -2107,8 +2182,6 @@ body,
     <p class="line">And you&rsquo;re about to say no.</p>
   </section>
 
-  <hr class="headline-break">
-
   <section>
     <h2>Why The 3rd Bottle Is On Us &#128153;</h2>
     <div class="photo content-photo"><img width="1200" height="805" src="pool.jpg" alt="Woman in her sixties sitting relaxed and smiling by a pool"></div>
@@ -2130,11 +2203,11 @@ body,
       <div class="packs">
         <div class="pack rec">
           <span class="ribbon">Reserved For You</span>
-          <div class="pack-top"><span class="pack-name">3 Bottles &mdash; Pay For 2, Your 3rd Is <span class="pn-free">FREE</span></span><span class="pack-badge">SAVE $89.90</span></div><div class="photo product-oil-photo inline-product-oil"><img width="1000" height="1000" src="productoil.png" alt="5 bottles of Nurovita Natural Warming Oil"></div>
+          <div class="pack-top"><span class="pack-name">3 Bottles &mdash; Pay For 2, Your 3rd Is <span class="pn-free">FREE</span></span><span class="pack-badge">SAVE $89.90</span></div><span class="sr-only">$29.90 per bottle. Regular price $49.90 per bottle. You pay for 2 bottles, your 3rd is free.</span><div class="photo product-oil-photo inline-product-oil"><span class="price-burst" aria-hidden="true"><span class="pb-now">$29<span class="pb-cents">.90</span></span><span class="pb-was">$49<span class="pb-wc">.90</span></span><span class="pb-unit">per bottle</span></span><img width="1000" height="1000" src="productoil.webp" alt="3 bottles of Nurovita Natural Warming Oil"></div>
           <div class="modes">
             <div class="mode">
               
-              <div class="pack-foot benefit-list"><div><span>&#9989;</span><p><b>Esculin-Free</b> &mdash; safe with blood thinners (Warfarin, Eliquis, etc.)</p></div><div><span>&#9989;</span><p><b>FREE Shipping</b> &mdash; same box as your Roller</p></div><div><span>&#9989;</span><p><b>90-Day Money-Back Guarantee</b> INCLUDED</p></div></div><div class="today-only">&#128680; Today Only: Just <b>$29.90</b> per bottle <span class="to-was">(Normally $49.90)</span></div><div class="addbtn click_upsell"><span class="addbtn-main">YES! I Accept My Reserved Bottles</span><span class="addbtn-sub">90-Day Money-Back Guarantee</span></div>
+              <div class="pack-foot benefit-list"><div><span>&#9989;</span><p><b>Esculin-Free</b> &mdash; safe with blood thinners (Warfarin, Eliquis, etc.)</p></div><div><span>&#9989;</span><p><b>FREE Shipping</b> &mdash; same box as your Roller</p></div><div><span>&#9989;</span><p><b>90-Day Money-Back Guarantee</b> INCLUDED</p></div></div><div class="addbtn click_upsell"><span class="addbtn-main">YES! I Accept My Reserved Bottles</span><span class="addbtn-sub">90-Day Money-Back Guarantee</span></div>
             </div>
           </div>
         </div>
@@ -2142,8 +2215,6 @@ body,
     </div>
     <div class="decline"><i>No thanks&hellip; I&rsquo;m declining this gift. I&rsquo;ll take my chances and hope the hard layer softens on its own.</i></div>
   </section>
-
-  <hr class="headline-break">
 
   <section>
     <h2>Try It 100% Risk-Free for 90 Days</h2>
@@ -2162,11 +2233,11 @@ body,
       <div class="packs">
         <div class="pack rec">
           <span class="ribbon">Reserved For You</span>
-          <div class="pack-top"><span class="pack-name">3 Bottles &mdash; Pay For 2, Your 3rd Is <span class="pn-free">FREE</span></span><span class="pack-badge">SAVE $89.90</span></div><div class="photo product-oil-photo inline-product-oil"><img width="1000" height="1000" src="productoil.png" alt="5 bottles of Nurovita Natural Warming Oil"></div>
+          <div class="pack-top"><span class="pack-name">3 Bottles &mdash; Pay For 2, Your 3rd Is <span class="pn-free">FREE</span></span><span class="pack-badge">SAVE $89.90</span></div><span class="sr-only">$29.90 per bottle. Regular price $49.90 per bottle. You pay for 2 bottles, your 3rd is free.</span><div class="photo product-oil-photo inline-product-oil"><span class="price-burst" aria-hidden="true"><span class="pb-now">$29<span class="pb-cents">.90</span></span><span class="pb-was">$49<span class="pb-wc">.90</span></span><span class="pb-unit">per bottle</span></span><img width="1000" height="1000" src="productoil.webp" alt="3 bottles of Nurovita Natural Warming Oil"></div>
           <div class="modes">
             <div class="mode">
               
-              <div class="pack-foot benefit-list"><div><span>&#9989;</span><p><b>Esculin-Free</b> &mdash; safe with blood thinners (Warfarin, Eliquis, etc.)</p></div><div><span>&#9989;</span><p><b>FREE Shipping</b> &mdash; same box as your Roller</p></div><div><span>&#9989;</span><p><b>90-Day Money-Back Guarantee</b> INCLUDED</p></div></div><div class="today-only">&#128680; Today Only: Just <b>$29.90</b> per bottle <span class="to-was">(Normally $49.90)</span></div><div class="addbtn click_upsell"><span class="addbtn-main">YES! I Accept My Reserved Bottles</span><span class="addbtn-sub">90-Day Money-Back Guarantee</span></div>
+              <div class="pack-foot benefit-list"><div><span>&#9989;</span><p><b>Esculin-Free</b> &mdash; safe with blood thinners (Warfarin, Eliquis, etc.)</p></div><div><span>&#9989;</span><p><b>FREE Shipping</b> &mdash; same box as your Roller</p></div><div><span>&#9989;</span><p><b>90-Day Money-Back Guarantee</b> INCLUDED</p></div></div><div class="addbtn click_upsell"><span class="addbtn-main">YES! I Accept My Reserved Bottles</span><span class="addbtn-sub">90-Day Money-Back Guarantee</span></div>
             </div>
           </div>
         </div>
